@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Upload Item | Lost & Found</title>
+  <link rel="stylesheet" href="styles_upload.css">
+  <style>
+    body {
+      font-family: "Poppins", sans-serif;
+      background: linear-gradient(270deg, #74ebd5, #ACB6E5, #89f7fe, #66a6ff);
+      background-size: 400% 400%;
+      animation: gradientBG 15s ease infinite;
+      margin: 0;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding-top: 80px;
+    }
+
+    @keyframes gradientBG {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    /* Fixed Blue Header */
+    header {
+      width: 100%;
+      position: fixed;
+      top: 0;
+      left: 0;
+      background: linear-gradient(90deg, #1e3c72, #2a5298);
+      color: #fff;
+      text-align: center;
+      padding: 16px 0;
+      font-size: 1.5rem;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
+      z-index: 1000;
+    }
+
+    /* Back Button (small, neat) */
+    .back-btn {
+      position: absolute;
+      left: 15px;
+      top: 50%;
+      transform: translateY(-50%);
+      background: #fff;
+      color: #1e3c72;
+      border: none;
+      padding: 5px 10px;
+      border-radius: 6px;
+      font-weight: 600;
+      font-size: 13px;
+      cursor: pointer;
+      text-decoration: none;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+      transition: 0.3s ease;
+    }
+    .back-btn:hover {
+      background: #eef4ff;
+      transform: translateY(-50%) scale(1.05);
+    }
+
+    /* Upload Card */
+    main {
+      background: #fff;
+      border-radius: 14px;
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+      padding: 25px 25px 20px;
+      margin: 20px auto;
+      width: 90%;
+      max-width: 400px;
+    }
+
+    label {
+      font-weight: 600;
+      color: #1e3c72;
+      display: block;
+      margin-top: 6px;
+      margin-bottom: 3px;
+      font-size: 14px;
+    }
+
+    input, textarea, select {
+      width: 100%;
+      padding: 9px;
+      border: 2px solid #b0c4ff;
+      border-radius: 8px;
+      font-size: 14px;
+      outline: none;
+      margin-bottom: 8px;
+      transition: 0.3s ease;
+    }
+
+    input:focus, textarea:focus, select:focus {
+      border-color: #2a5298;
+      box-shadow: 0 0 6px rgba(42, 82, 152, 0.3);
+    }
+
+    textarea {
+      resize: none;
+      height: 70px;
+    }
+
+    button {
+      width: 100%;
+      padding: 12px;
+      border: none;
+      border-radius: 8px;
+      background: linear-gradient(90deg, #2a5298, #1e3c72);
+      color: #fff;
+      font-weight: 600;
+      cursor: pointer;
+      transition: 0.3s ease;
+      margin-top: 8px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    }
+
+    button:hover {
+      opacity: 0.9;
+      transform: translateY(-1px);
+    }
+
+    /* Popup */
+    .popup {
+      display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0, 0, 0, 0.45);
+      justify-content: center;
+      align-items: center;
+      z-index: 2000;
+    }
+
+    .popup-content {
+      background: #fff;
+      padding: 25px;
+      border-radius: 14px;
+      text-align: center;
+      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+      animation: fadeIn 0.3s ease;
+    }
+
+    .popup-content h2 {
+      color: #1e3c72;
+      margin-bottom: 8px;
+    }
+
+    .popup-content p {
+      color: #555;
+      margin-bottom: 12px;
+    }
+
+    .popup-content button {
+      background: linear-gradient(90deg, #2a5298, #1e3c72);
+      color: #fff;
+      border: none;
+      padding: 8px 18px;
+      border-radius: 8px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: 0.3s ease;
+    }
+
+    .popup-content button:hover {
+      opacity: 0.9;
+      transform: scale(1.05);
+    }
+
+    @keyframes fadeIn {
+      from {opacity: 0; transform: scale(0.9);}
+      to {opacity: 1; transform: scale(1);}
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <a href="feed.html" class="back-btn">← Back</a>
+    Upload Item
+  </header>
+
+  <main>
+    <form id="uploadForm" enctype="multipart/form-data">
+      <label>Item Name</label>
+      <input name="item" id="item" required>
+
+      <label>Description</label>
+      <textarea name="desc" id="desc" required></textarea>
+
+      <label>Status</label>
+      <select name="status">
+        <option value="lost">Lost</option>
+        <option value="found">Found</option>
+      </select>
+
+      <label>Contact</label>
+      <input name="contact" id="contact" required>
+	
+	<label>Gmail</label>
+<input type="email" name="email" id="email" required>
+
+
+      <label>Picture</label>
+      <input type="file" name="picture" id="picture" accept="image/*">
+
+      <button type="submit">Submit</button>
+    </form>
+  </main>
+
+  <div class="popup" id="successPopup">
+    <div class="popup-content">
+      <h2>✅ Upload Successful!</h2>
+      <p>Your item has been added to the feed.</p>
+      <button onclick="goHome()">Go to Feed</button>
+    </div>
+  </div>
+
+  <script src="upload.js"></script>
+</body>
+</html>

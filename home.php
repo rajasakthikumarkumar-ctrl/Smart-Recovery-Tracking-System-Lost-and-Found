@@ -1,0 +1,228 @@
+<?php
+session_start();
+if (!isset($_SESSION["id"])) {
+    header("Location: login.html");
+    exit();
+}
+?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Lost & Found | Home</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body, html { height: 100%; font-family: "Poppins", sans-serif; color: #fff; overflow-x: hidden; }
+
+  /* Animated Background */
+  body {
+    background: linear-gradient(270deg, #74ebd5, #ACB6E5, #89f7fe, #66a6ff);
+    background-size: 800% 800%;
+    animation: gradientBG 18s ease infinite;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+    text-align: center;
+  }
+  @keyframes gradientBG {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+
+  /* Floating Icons */
+  .floating-icon {
+    position: absolute;
+    width: 70px;
+    opacity: 0.35;
+    animation: float linear infinite;
+    pointer-events: none;
+    z-index: 1;
+  }
+  @keyframes float {
+    from { transform: translateY(120vh) rotate(0deg); }
+    to { transform: translateY(-120vh) rotate(360deg); }
+  }
+  .icon1 { left: 8%;  animation-duration: 15s; }
+  .icon2 { left: 22%; animation-duration: 18s; animation-delay: 3s; }
+  .icon3 { left: 35%; animation-duration: 20s; animation-delay: 6s; }
+  .icon4 { left: 50%; animation-duration: 16s; animation-delay: 2s; }
+  .icon5 { left: 65%; animation-duration: 22s; animation-delay: 5s; }
+  .icon6 { left: 78%; animation-duration: 19s; animation-delay: 7s; }
+  .icon7 { left: 90%; animation-duration: 21s; animation-delay: 4s; }
+
+  /* Top button group */
+  .top-buttons {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    z-index: 10;
+  }
+
+  .top-link {
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    color: #ffffff;
+    text-shadow: 0 1px 4px rgba(0,0,0,0.4);
+    transition: 0.2s ease;
+  }
+
+  .top-link:hover {
+    text-decoration: underline;
+    opacity: 0.9;
+  }
+
+  /* Logout button */
+  .logout-btn {
+    background: linear-gradient(90deg, #5b86e5, #36d1dc);
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    padding: 8px 14px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.3s ease;
+    box-shadow: 0 3px 8px rgba(0,0,0,0.3);
+  }
+
+  .logout-btn:hover {
+    transform: scale(1.05);
+    background: linear-gradient(90deg, #36d1dc, #5b86e5);
+  }
+
+  /* Title */
+  h1 {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #ffffff;
+    text-shadow: 0 2px 10px rgba(0,0,0,0.4);
+    margin-bottom: 25px;
+    z-index: 5;
+  }
+
+  /* Tagline Box */
+  .tagline-box {
+    background: rgba(0, 0, 0, 0.35);
+    padding: 25px 28px;
+    border-radius: 15px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+    margin-bottom: 30px;
+    border-right: 3px solid #fff;
+    font-size: 1.3rem;
+    line-height: 1.6;
+    color: #fff;
+    font-family: "Georgia", serif;
+    animation: blinkCursor 0.8s steps(2) infinite;
+    overflow: hidden;
+    max-width: 800px;
+    width: 85%;
+  }
+
+  @keyframes blinkCursor { 50% { border-color: transparent; } }
+
+  /* Feed Button */
+  .feed-btn {
+    display: inline-block;
+    background: linear-gradient(90deg, #5b86e5, #36d1dc);
+    color: #fff;
+    font-weight: 600;
+    text-decoration: none;
+    padding: 14px 34px;
+    border-radius: 10px;
+    font-size: 1rem;
+    transition: 0.3s ease;
+    box-shadow: 0 4px 15px rgba(54, 209, 220, 0.5);
+    z-index: 5;
+  }
+  .feed-btn:hover {
+    opacity: 0.95;
+    transform: scale(1.05);
+    box-shadow: 0 0 20px rgba(91, 134, 229, 0.8);
+  }
+
+  .welcome {
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: #fffae3;
+    text-shadow: 0 2px 6px rgba(0,0,0,0.5);
+    margin-top: 20px;
+  }
+</style>
+</head>
+
+<body>
+
+<div class="top-buttons">
+  <span class="top-link" onclick="window.location.href='about.html'">About Us</span>
+  <span class="top-link" onclick="window.location.href='contact.html'">Contact Us</span>
+  <button class="logout-btn" onclick="logout()">Logout</button>
+</div>
+
+<!-- Floating icons -->
+<img src="https://img.icons8.com/emoji/96/key-emoji.png" class="floating-icon icon1" />
+<img src="https://img.icons8.com/emoji/96/backpack-emoji.png" class="floating-icon icon2" />
+<img src="https://img.icons8.com/emoji/96/magnifying-glass-tilted-left.png" class="floating-icon icon3" />
+<img src="https://img.icons8.com/emoji/96/closed-book.png" class="floating-icon icon4" />
+<img src="https://img.icons8.com/emoji/96/mobile-phone.png" class="floating-icon icon5" />
+<img src="https://img.icons8.com/emoji/96/wallet.png" class="floating-icon icon6" />
+<img src="https://img.icons8.com/emoji/96/laptop.png" class="floating-icon icon7" />
+
+<h1>Lost & Found Portal</h1>
+
+<div class="tagline-box" id="tagline"></div>
+
+<a href="feed.html" class="feed-btn">Go to Feed</a>
+
+<div class="welcome">✨ Reuniting belongings with their owners ✨</div>
+
+<script>
+  const taglines = [
+    "✨ \"Connecting People, Reuniting Belongings\" – A safe space where lost items find their way back home.",
+    "🔎 \"Find What’s Lost, Return What’s Found\" – A community-driven portal to bring smiles back.",
+    "🤝 \"Together, We Care\" – Your simple and trusted solution to report, search, and recover.",
+    "🌍 \"One Portal, Countless Happy Returns\" – Because every lost item deserves a chance to be found.",
+    "💡 \"Smart. Simple. Secure.\" – Making lost and found easy for everyone.",
+    "💖 \"Turning Worries into Wonders\" – Where lost things meet kind hearts."
+  ];
+
+  let i = 0, j = 0, isDeleting = false;
+  const speed = 60;
+  const taglineElement = document.getElementById("tagline");
+
+  function typeEffect() {
+    if (i < taglines.length) {
+      if (!isDeleting && j <= taglines[i].length) {
+        taglineElement.textContent = taglines[i].substring(0, j++);
+      } else if (isDeleting && j >= 0) {
+        taglineElement.textContent = taglines[i].substring(0, j--);
+      }
+
+      if (j === taglines[i].length) {
+        isDeleting = true;
+        setTimeout(typeEffect, 1800);
+        return;
+      } else if (isDeleting && j === 0) {
+        isDeleting = false;
+        i = (i + 1) % taglines.length;
+      }
+      setTimeout(typeEffect, isDeleting ? speed / 2 : speed);
+    }
+  }
+  typeEffect();
+
+  function logout() {
+    window.location.href = "login.html";
+  }
+</script>
+
+</body>
+</html>

@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lost & Found | Feed</title>
+  <link rel="stylesheet" href="styles_feed.css">
+  <style>
+    body {
+      font-family: "Poppins", sans-serif;
+      background: linear-gradient(270deg, #74ebd5, #ACB6E5, #89f7fe, #66a6ff);
+      background-size: 400% 400%;
+      animation: gradientBG 15s ease infinite;
+      margin: 0;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    @keyframes gradientBG {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    /* Blue Gradient Header */
+    header {
+      width: 100%;
+      background: linear-gradient(90deg, #1e3c72, #2a5298);
+      color: #fff;
+      text-align: center;
+      padding: 18px 0;
+      font-size: 1.6rem;
+      font-weight: 700;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+      position: relative;
+      letter-spacing: 0.5px;
+    }
+
+    /* Back Button */
+    .back-btn {
+      position: absolute;
+      left: 15px;
+      top: 50%;
+      transform: translateY(-50%);
+      background: #fff;
+      color: #1e3c72;
+      border: none;
+      padding: 6px 12px;
+      border-radius: 6px;
+      font-weight: 600;
+      font-size: 13px;
+      cursor: pointer;
+      transition: 0.3s ease;
+      text-decoration: none;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
+    }
+.top-controls {
+  position: absolute;
+  right: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  gap: 10px;
+}
+
+.search-bar {
+  padding: 8px 14px;
+  width: 200px;
+  border-radius: 20px;
+  border: none;
+  backdrop-filter: blur(10px);
+  background: rgba(255, 255, 255, 0.25);
+  outline: none;
+  color: white;
+}
+
+.search-bar::placeholder {
+  color: #eee;
+}
+
+.filter-box {
+  padding: 8px 12px;
+  border-radius: 12px;
+  border: none;
+  font-size: 14px;
+  background: rgba(255,255,255,0.25);
+  color: white;
+  backdrop-filter: blur(10px);
+  outline: none;
+}
+
+.filter-box option {
+  color: black;
+}
+
+.search-bar::placeholder {
+  color: #f0f0f0;
+}
+
+.search-bar:focus {
+  background: rgba(255, 255, 255, 0.35);
+  width: 250px;
+}
+
+
+    .back-btn:hover {
+      background: #eef4ff;
+      transform: translateY(-50%) scale(1.05);
+    }
+
+    .stats {
+      background: #fff;
+      border-radius: 15px;
+      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+      padding: 20px;
+      width: 90%;
+      max-width: 900px;
+      margin: 25px auto;
+      text-align: center;
+      font-weight: 600;
+      color: #333;
+    }
+
+    .feed {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+      width: 90%;
+      max-width: 1200px;
+      margin: 10px auto 40px auto;
+    }
+
+    .feed-item {
+      background: #fff;
+      border-radius: 16px;
+      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+      padding: 20px;
+      transition: 0.3s;
+    }
+
+    .feed-item:hover {
+      transform: translateY(-5px);
+    }
+
+    .feed-item img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+      border-radius: 10px;
+      margin-bottom: 12px;
+    }
+
+    .feed-item h3 {
+      color: #1e3c72;
+      margin-bottom: 6px;
+    }
+
+    .feed-item p {
+      font-size: 14px;
+      color: #555;
+      margin: 4px 0;
+    }
+
+    .upload-section {
+      margin: 20px auto 40px;
+      text-align: center;
+    }
+
+    .upload-btn {
+      display: inline-block;
+      background: linear-gradient(90deg, #2a5298, #1e3c72);
+      color: white;
+      padding: 12px 28px;
+      border-radius: 8px;
+      font-weight: 600;
+      text-decoration: none;
+      font-size: 15px;
+      transition: 0.3s;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    }
+
+    .upload-btn:hover {
+      opacity: 0.9;
+      transform: translateY(-2px);
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <a href="home.html" class="back-btn">← Back</a>
+    Lost & Found - Feed
+  <input type="text" id="searchBar" class="search-bar" placeholder="Search items...">
+
+  <select id="categoryFilter" class="filter-box">
+    <option value="">All Categories</option>
+    <option value="lost">Lost</option>
+    <option value="found">Found</option>
+  </select>
+
+  <select id="sortFilter" class="filter-box">
+    <option value="newest">Newest First</option>
+    <option value="oldest">Oldest First</option>
+  </select>
+</div>
+
+
+  </header>
+
+  <div class="stats" id="stats">
+    <!-- Stats loaded dynamically from feed.js -->
+  </div>
+
+  <div class="feed" id="feed">
+    <!-- Items loaded dynamically from feed.js -->
+  </div>
+
+  <div class="upload-section">
+    <a href="pro_normal.html" class="upload-btn">➕ Upload New Item</a>
+  </div>
+
+  <script src="feed.js"></script>
+</body>
+</html>
